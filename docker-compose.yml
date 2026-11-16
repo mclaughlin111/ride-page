@@ -1,0 +1,21 @@
+services:
+  ride:
+    build: .
+    image: ride-board:latest
+    container_name: ride-board
+    restart: unless-stopped
+    ports:
+      # Bound to localhost only; Nginx is the public entry point.
+      - "127.0.0.1:${HOST_PORT:-3020}:3000"
+    environment:
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - DATA_FILE_PATH=/app/data/rides.json
+      - NEXT_PUBLIC_BASE_PATH=/ride
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      - SESSION_SECRET=${SESSION_SECRET:?Set SESSION_SECRET in .env}
+    volumes:
+      - ride-data:/app/data
+
+volumes:
+  ride-data:
