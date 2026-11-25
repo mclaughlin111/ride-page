@@ -185,7 +185,8 @@ describe("route tracks", () => {
     const r = parseTrack({ track_points: big });
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.points.length / 2).toBeLessThanOrEqual(MAX_POINTS);
-  });
+    // Worst case for Douglas-Peucker; takes ~4 s locally and longer on CI runners.
+  }, 30_000);
 });
 
 describe("route geometry", () => {
