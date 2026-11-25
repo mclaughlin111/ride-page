@@ -8,6 +8,54 @@
   --line-soft: #d4d4cf;
   --surface: #ffffff;
   --danger: #a11d1d;
+
+  /* Map HUD (floating panels over the map canvas). */
+  --map-bg: #ece8df;
+  --hud: rgb(250 249 245 / 0.88);
+  --hud-line: rgb(40 40 36 / 0.22);
+  --hud-line-strong: rgb(40 40 36 / 0.55);
+  --hud-hover: rgb(40 40 36 / 0.08);
+  --hud-text: #2b2b28;
+  --hud-strong: #141412;
+  --hud-muted: #6f6e68;
+  --hud-active: #1f1f1c;
+  --hud-active-fg: #f6f4ee;
+  --map-accent: #23838a;
+  --map-label: rgb(250 249 245 / 0.86);
+  --map-label-line: rgb(30 30 28 / 0.45);
+  --legend-low: #d8cfb0;
+  --legend-mid: #aeb393;
+  --legend-high: #e6e1d6;
+  color-scheme: light;
+}
+
+/* Charcoal/graphite rather than pure black; borders and text lifted for contrast. */
+[data-theme="dark"] {
+  --background: #17191b;
+  --foreground: #e9e8e4;
+  --muted: #a3a29c;
+  --line: #d9d8d3;
+  --line-soft: #3b3e41;
+  --surface: #202326;
+  --danger: #ef7a7a;
+
+  --map-bg: #15171a;
+  --hud: rgb(28 31 34 / 0.86);
+  --hud-line: rgb(255 255 255 / 0.2);
+  --hud-line-strong: rgb(255 255 255 / 0.5);
+  --hud-hover: rgb(255 255 255 / 0.1);
+  --hud-text: #d6d6d2;
+  --hud-strong: #f4f4f1;
+  --hud-muted: #93938e;
+  --hud-active: #e6e5e0;
+  --hud-active-fg: #141517;
+  --map-accent: #6fdde2;
+  --map-label: rgb(20 22 25 / 0.78);
+  --map-label-line: rgb(255 255 255 / 0.5);
+  --legend-low: #2b3033;
+  --legend-mid: #4a5448;
+  --legend-high: #9a9a8e;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -18,6 +66,19 @@
   --color-line-soft: var(--line-soft);
   --color-surface: var(--surface);
   --color-danger: var(--danger);
+  --color-map-bg: var(--map-bg);
+  --color-hud: var(--hud);
+  --color-hud-line: var(--hud-line);
+  --color-hud-line-strong: var(--hud-line-strong);
+  --color-hud-hover: var(--hud-hover);
+  --color-hud-text: var(--hud-text);
+  --color-hud-strong: var(--hud-strong);
+  --color-hud-muted: var(--hud-muted);
+  --color-hud-active: var(--hud-active);
+  --color-hud-active-fg: var(--hud-active-fg);
+  --color-map-accent: var(--map-accent);
+  --color-map-label: var(--map-label);
+  --color-map-label-line: var(--map-label-line);
   --font-mono: var(--font-roboto-mono), ui-monospace, SFMono-Regular, Menlo,
     Consolas, monospace;
 }
@@ -62,7 +123,7 @@ body {
     @apply bg-surface text-foreground;
   }
   .btn-danger {
-    @apply border-danger bg-danger text-white;
+    @apply border-danger bg-danger text-surface;
   }
   .btn-danger:hover:not(:disabled) {
     @apply bg-surface text-danger;

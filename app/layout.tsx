@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import { themeInitScript } from "@/lib/theme-config";
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
@@ -28,7 +29,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${robotoMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      data-theme="light"
+      className={`${robotoMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Applies the saved theme before first paint (see lib/theme-config.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

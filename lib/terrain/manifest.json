@@ -1,0 +1,342 @@
+{
+  "source": "OS Terrain 50 (ASCII grid), EPSG:27700",
+  "attribution": "Contains OS data © Crown copyright and database right 2026",
+  "centre": {
+    "e": 359247,
+    "n": 173000,
+    "lat": 51.4545,
+    "lon": -2.5879
+  },
+  "focus": {
+    "west": 347100,
+    "north": 181550,
+    "east": 368200,
+    "south": 154600
+  },
+  "datasets": [
+    {
+      "id": "bristol",
+      "label": "Bristol",
+      "file": "bristol.bin",
+      "west": 347100,
+      "north": 181550,
+      "cols": 422,
+      "rows": 539,
+      "cell": 50,
+      "minElevation": -4,
+      "maxElevation": 323.1,
+      "contour": {
+        "minor": 10,
+        "major": 50
+      },
+      "landmarks": [
+        {
+          "name": "Clifton Down",
+          "e": 356992,
+          "n": 174242
+        },
+        {
+          "name": "Clifton Suspension Bridge",
+          "e": 356454,
+          "n": 173056,
+          "span": [
+            {
+              "e": 356343,
+              "n": 173068
+            },
+            {
+              "e": 356558,
+              "n": 173033
+            }
+          ]
+        },
+        {
+          "name": "Clifton",
+          "e": 357332,
+          "n": 173316
+        },
+        {
+          "name": "Constitution Hill",
+          "e": 357724,
+          "n": 172778
+        },
+        {
+          "name": "Chew Valley Lake",
+          "e": 357080,
+          "n": 159893
+        },
+        {
+          "name": "Avon Gorge",
+          "e": 356295,
+          "n": 173914
+        },
+        {
+          "name": "Brandon Hill",
+          "e": 358037,
+          "n": 172920
+        },
+        {
+          "name": "Park Street",
+          "e": 358352,
+          "n": 173140
+        },
+        {
+          "name": "Belmont Hill",
+          "e": 353770,
+          "n": 171267
+        },
+        {
+          "name": "Ashton Court",
+          "e": 355375,
+          "n": 172031
+        },
+        {
+          "name": "Harbourside",
+          "e": 358506,
+          "n": 172416
+        },
+        {
+          "name": "River Avon",
+          "e": 360274,
+          "n": 171901
+        },
+        {
+          "name": "Dundry Hill",
+          "e": 355642,
+          "n": 166801
+        }
+      ]
+    },
+    {
+      "id": "avon",
+      "label": "Avon",
+      "file": "avon.bin",
+      "west": 333700,
+      "north": 192800,
+      "cols": 436,
+      "rows": 494,
+      "cell": 100,
+      "minElevation": -4.1,
+      "maxElevation": 322.7,
+      "contour": {
+        "minor": 20,
+        "major": 100
+      },
+      "landmarks": [
+        {
+          "name": "Bristol",
+          "e": 359247,
+          "n": 173000
+        },
+        {
+          "name": "Bath",
+          "e": 375112,
+          "n": 164734
+        },
+        {
+          "name": "Wells",
+          "e": 354886,
+          "n": 145776
+        },
+        {
+          "name": "Clevedon",
+          "e": 340736,
+          "n": 171347
+        },
+        {
+          "name": "Portishead",
+          "e": 346977,
+          "n": 176450
+        },
+        {
+          "name": "Thornbury",
+          "e": 363720,
+          "n": 190149
+        },
+        {
+          "name": "Severn Bridge",
+          "e": 355916,
+          "n": 190267
+        },
+        {
+          "name": "Avonmouth",
+          "e": 351576,
+          "n": 178183
+        },
+        {
+          "name": "Keynsham",
+          "e": 365546,
+          "n": 168393
+        },
+        {
+          "name": "Clifton Suspension Bridge",
+          "e": 356454,
+          "n": 173056,
+          "span": [
+            {
+              "e": 356343,
+              "n": 173068
+            },
+            {
+              "e": 356558,
+              "n": 173033
+            }
+          ]
+        },
+        {
+          "name": "Dundry Hill",
+          "e": 355642,
+          "n": 166801
+        },
+        {
+          "name": "Chew Valley Lake",
+          "e": 357080,
+          "n": 159893
+        },
+        {
+          "name": "Blagdon Lake",
+          "e": 350284,
+          "n": 159566
+        },
+        {
+          "name": "Cheddar Gorge",
+          "e": 347234,
+          "n": 154347
+        },
+        {
+          "name": "Cheddar Reservoir",
+          "e": 344644,
+          "n": 153507
+        },
+        {
+          "name": "Burrington Combe",
+          "e": 347902,
+          "n": 158310
+        },
+        {
+          "name": "Black Down",
+          "e": 349178,
+          "n": 157630
+        },
+        {
+          "name": "Crook Peak",
+          "e": 339859,
+          "n": 155896
+        },
+        {
+          "name": "Priddy",
+          "e": 352574,
+          "n": 151036
+        },
+        {
+          "name": "Lansdown",
+          "e": 373673,
+          "n": 169067
+        },
+        {
+          "name": "Kelston Round Hill",
+          "e": 370325,
+          "n": 167417
+        },
+        {
+          "name": "Wrington",
+          "e": 346832,
+          "n": 162604
+        },
+        {
+          "name": "Chew Magna",
+          "e": 357629,
+          "n": 163058
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "label": "Region",
+      "file": "region.bin",
+      "west": 199000,
+      "north": 333000,
+      "cols": 321,
+      "rows": 320,
+      "cell": 1000,
+      "minElevation": -4,
+      "maxElevation": 759.3,
+      "contour": {
+        "minor": 50,
+        "major": 250
+      },
+      "landmarks": [
+        {
+          "name": "Bristol",
+          "e": 359247,
+          "n": 173000
+        },
+        {
+          "name": "Bath",
+          "e": 375112,
+          "n": 164734
+        },
+        {
+          "name": "Cardiff",
+          "e": 318218,
+          "n": 176509
+        },
+        {
+          "name": "Gloucester",
+          "e": 383694,
+          "n": 218429
+        },
+        {
+          "name": "Swindon",
+          "e": 415370,
+          "n": 184125
+        },
+        {
+          "name": "Exeter",
+          "e": 291812,
+          "n": 92097
+        },
+        {
+          "name": "Mendip Hills",
+          "e": 349390,
+          "n": 157183
+        },
+        {
+          "name": "Cotswold Edge",
+          "e": 388361,
+          "n": 205714
+        },
+        {
+          "name": "Pen y Fan",
+          "e": 301198,
+          "n": 221581
+        },
+        {
+          "name": "Dunkery Beacon",
+          "e": 289125,
+          "n": 141503
+        },
+        {
+          "name": "Dartmoor",
+          "e": 264130,
+          "n": 76233
+        },
+        {
+          "name": "Salisbury Plain",
+          "e": 407080,
+          "n": 146761
+        },
+        {
+          "name": "Malvern Hills",
+          "e": 376604,
+          "n": 245130
+        },
+        {
+          "name": "Black Mountains",
+          "e": 325887,
+          "n": 229609
+        }
+      ]
+    }
+  ]
+}

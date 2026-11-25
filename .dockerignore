@@ -9,3 +9,8 @@ data
 coverage
 npm-debug.log*
 tests
+terr50_gagg_gb
+*.jpeg
+osm
+*.osm.pbf
+.github

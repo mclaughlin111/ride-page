@@ -33,6 +33,9 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
   poweredByHeader: false,
+  experimental: {
+    agentUpgrade: "security",
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

@@ -124,7 +124,7 @@ export function RideBoard({
 
   return (
     <div
-      className={`mx-auto flex min-h-dvh w-full max-w-xl flex-col pb-6 pt-4 sm:px-4 ${hasMultiple ? "px-8" : "px-4"}`}
+      className={`mx-auto flex min-h-[calc(100dvh-1.75rem)] w-full max-w-xl flex-col pb-6 pt-4 sm:px-4 ${hasMultiple ? "px-8" : "px-4"}`}
     >
       <header className="mb-4 flex min-h-11 items-center justify-between border-b border-line pb-3">
         <span className="text-sm font-bold uppercase tracking-[0.12em]">

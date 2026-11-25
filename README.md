@@ -6,6 +6,32 @@ Mobile-first group ride page built with Next.js (App Router), TypeScript and Tai
 - Signed-in admins see an **Edit** tag on each ride and a calendar button next to the date of upcoming rides that opens the editor on the date field. Visitors get a mini month calendar instead.
 - Navigate rides by swiping, with the on-screen arrows, or with the left/right arrow keys. Deep link a ride with `/?ride=<ride-id>`.
 - Admin `/admin` adds, edits, deletes, completes and reopens rides, and copies public links.
+- A thin **Planner / Map** toggle at the top of `/` switches to a topographic map (`/?view=map`). The map is built for desktop; on phones it still works and shows a "best on desktop" notice.
+
+## Terrain map
+
+The map renders OS Terrain 50 elevation with Three.js / React Three Fiber in a dark wireframe style:
+
+- Light / dark theme toggle (top bar, all pages). Saved in `localStorage` (default light) and applied before first paint. Each theme has its own 3D palette in `components/map/palette.ts`; switching keeps camera, area and routes.
+- Relief shading: hillshade, slope and curvature computed from the real elevation grid, with a hypsometric colour ramp, under the wireframe and contours.
+- Areas: **Bristol** (50 m grid, Avonmouth to Keynsham and south past Chew Valley Lake), **Avon** (100 m grid, about twice the Bristol extent each way: Severn Bridge to Wells and Clevedon to Bath, including the Mendips with Cheddar Gorge, Burrington Combe and Black Down) and **Region** (1 km grid, ~160 km around Bristol).
+- Compass (top right) shows heading; click it to animate back to the default north-up view. **2D / 3D** sits beneath it and keeps the current area, routes and layers.
+- Exaggeration slider (log scale) with 1×–20× stops for Bristol, up to 30× for Avon and up to 50× for the region. Terrain, roads, routes, labels and landmark models all use the same vertical scale.
+- OpenStreetMap layers (Bristol and Avon areas): roads, paths/cycleways/bridleways, rail, water, parks/woods and built-up areas. Area fills are rasterised onto the terrain; lines are draped on it and fade out by zoom level.
+- Illustrated low-poly landmark models (Clifton Suspension Bridge, Chew Valley Lake, Dundry, Park Street, Ashton Court, Harbourside and more) with three levels of detail: model, simplified model, icon, then hidden for minor landmarks.
+- **Routes** dropdown: None, a single ride's route, or All routes. Geometry comes from `GET /api/routes`, which reads each ride's existing route link. Public Ride with GPS `/routes/<id>` and `/trips/<id>` links (with `privacy_code` if present) are fetched server-side from RWGPS's public JSON and cached for 6 hours. No API key is needed. Strava, Komoot, Garmin and RWGPS short `/s/` links are listed as unavailable: they need an authenticated API integration (OAuth) that is not built.
+
+### Map data
+
+Raw downloads are git-ignored and baked into small files that are committed:
+
+```bash
+npm run bake:terrain   # terr50_gagg_gb/ -> public/terrain/{bristol,avon,region}.bin, lib/terrain/manifest.json
+npm run bake:osm       # osm/*.osm.pbf  -> public/terrain/osm-{bristol,avon}.bin, lib/terrain/osm.json
+```
+
+- **Terrain**: OS Terrain 50 ASCII grid (`terr50_gagg_gb/`, ~160 MB; needs the `unzip` CLI). Int16 decimetres, row 0 north, British National Grid (EPSG:27700). Contains OS data © Crown copyright and database right 2026, [OS OpenData licence](https://www.ordnancesurvey.co.uk/opendata/licence).
+- **OpenStreetMap**: Geofabrik county extracts for Bristol, Somerset and Gloucestershire (~105 MB) in `osm/`; download commands are at the top of `scripts/bake-osm.mjs`. © OpenStreetMap contributors, [ODbL](https://www.openstreetmap.org/copyright). Run `bake:terrain` first; re-run `bake:osm` whenever the Bristol or Avon extent changes (the `OVERLAYS` list in the script says which datasets get an overlay).
 
 ## Local development
 
@@ -27,12 +53,12 @@ The app is served under the base path `/ride` (`NEXT_PUBLIC_BASE_PATH`). To use 
 
 ## Environment variables
 
-| Name | Purpose | Default |
-| --- | --- | --- |
-| `ADMIN_PASSWORD` | Password for `/admin`. Server only, never sent to the browser. | none (login disabled) |
-| `SESSION_SECRET` | Secret used to sign the session cookie. Use 16+ random characters, for example `openssl rand -base64 32`. | none (login disabled) |
-| `DATA_FILE_PATH` | Where rides are stored, relative to the working directory or absolute. | `data/rides.json` |
-| `NEXT_PUBLIC_BASE_PATH` | URL path the app is served under. Fixed at build time. | `/ride` |
+| Name                    | Purpose                                                                                                   | Default               |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | --------------------- |
+| `ADMIN_PASSWORD`        | Password for `/admin`. Server only, never sent to the browser.                                            | none (login disabled) |
+| `SESSION_SECRET`        | Secret used to sign the session cookie. Use 16+ random characters, for example `openssl rand -base64 32`. | none (login disabled) |
+| `DATA_FILE_PATH`        | Where rides are stored, relative to the working directory or absolute.                                    | `data/rides.json`     |
+| `NEXT_PUBLIC_BASE_PATH` | URL path the app is served under. Fixed at build time.                                                    | `/ride`               |
 
 If `ADMIN_PASSWORD` or `SESSION_SECRET` is missing (or the secret is shorter than 16 characters) the login page says admin is not configured.
 
@@ -50,6 +76,7 @@ Note: Safari does not accept `Secure` cookies on plain `http://localhost` with `
 
 ```
 GET    /api/rides            public
+GET    /api/routes           public (route geometry for the map)
 POST   /api/rides            admin
 PUT    /api/rides/[id]       admin
 DELETE /api/rides/[id]       admin
@@ -97,13 +124,13 @@ Restore by replacing the file (any time; it is re-read on every request). A cron
 
 The route form takes a normal share link and auto-detects the provider from the hostname (Ride with GPS, Strava, Garmin, Komoot, otherwise Other). The public page always shows the provider name and an **Open route** link. A preview iframe is added only when it can be built safely; otherwise a plain link card is shown. A failing or slow embed never affects the rest of the page.
 
-| Provider | Preview from a normal share link | With an official embed URL |
-| --- | --- | --- |
-| Ride with GPS | Yes, for `/routes/<id>` and `/trips/<id>` links (a `privacy_code` is passed through). Short `/s/...` links cannot be expanded without scraping, so they fall back to the link. | Yes |
-| Komoot | Yes, for `/tour/<id>` links. Works for public tours or links with a `share_token`. | Yes |
-| Strava | No. Strava embeds need a token generated by Strava. | Yes, `strava.com/(activities\|routes)/<id>/embed/<token>` for public content |
-| Garmin | No. Treated as a normal link. | Yes, only from `connect.garmin.com` |
-| Other | No | No |
+| Provider      | Preview from a normal share link                                                                                                                                               | With an official embed URL                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Ride with GPS | Yes, for `/routes/<id>` and `/trips/<id>` links (a `privacy_code` is passed through). Short `/s/...` links cannot be expanded without scraping, so they fall back to the link. | Yes                                                                          |
+| Komoot        | Yes, for `/tour/<id>` links. Works for public tours or links with a `share_token`.                                                                                             | Yes                                                                          |
+| Strava        | No. Strava embeds need a token generated by Strava.                                                                                                                            | Yes, `strava.com/(activities\|routes)/<id>/embed/<token>` for public content |
+| Garmin        | No. Treated as a normal link.                                                                                                                                                  | Yes, only from `connect.garmin.com`                                          |
+| Other         | No                                                                                                                                                                             | No                                                                           |
 
 Embed formats are provider-controlled and may change. If one stops working, the Open route link still works, and you can paste a new official embed URL.
 

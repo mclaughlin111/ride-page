@@ -1,0 +1,98 @@
+{
+  "source": "OpenStreetMap via Geofabrik extracts",
+  "attribution": "© OpenStreetMap contributors (ODbL)",
+  "classes": [
+    "residential",
+    "commercial",
+    "industrial",
+    "open",
+    "park",
+    "wood",
+    "water",
+    "stream",
+    "river",
+    "footpath",
+    "bridleway",
+    "cycleway",
+    "road_minor",
+    "road_secondary",
+    "road_major",
+    "rail",
+    "bridge"
+  ],
+  "kinds": [
+    "fill",
+    "fill",
+    "fill",
+    "fill",
+    "fill",
+    "fill",
+    "fill",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line",
+    "line"
+  ],
+  "overlays": [
+    {
+      "dataset": "bristol",
+      "file": "osm-bristol.bin",
+      "origin": {
+        "e": 357650,
+        "n": 168075
+      },
+      "counts": {
+        "residential": 2839,
+        "commercial": 697,
+        "industrial": 1342,
+        "open": 10740,
+        "park": 10073,
+        "wood": 3404,
+        "water": 1041,
+        "stream": 1037,
+        "river": 165,
+        "footpath": 26995,
+        "bridleway": 2073,
+        "cycleway": 2424,
+        "road_minor": 18733,
+        "road_secondary": 3308,
+        "road_major": 3436,
+        "rail": 619,
+        "bridge": 415
+      }
+    },
+    {
+      "dataset": "avon",
+      "file": "osm-avon.bin",
+      "origin": {
+        "e": 355500,
+        "n": 168100
+      },
+      "counts": {
+        "residential": 5513,
+        "commercial": 958,
+        "industrial": 2178,
+        "open": 20575,
+        "park": 16380,
+        "wood": 7618,
+        "water": 2305,
+        "stream": 2280,
+        "river": 606,
+        "footpath": 48427,
+        "bridleway": 6495,
+        "cycleway": 3649,
+        "road_minor": 33781,
+        "road_secondary": 5960,
+        "road_major": 5354,
+        "rail": 898,
+        "bridge": 929
+      }
+    }
+  ]
+}

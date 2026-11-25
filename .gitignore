@@ -44,3 +44,10 @@ next-env.d.ts
 /data/*.json
 /data/*.tmp
 !/.env.example
+
+# raw OS Terrain 50 download (baked into public/terrain by npm run bake:terrain)
+/terr50_gagg_gb/
+
+# raw OpenStreetMap extracts (baked by npm run bake:osm)
+/osm/
+/*.osm.pbf

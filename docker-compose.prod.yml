@@ -1,7 +1,9 @@
-# Server-side compose file: runs the prebuilt image (see DEPLOYMENT.md, "Deploy from your Mac").
+# Server-side compose file: runs the prebuilt image (see DEPLOYMENT.md).
+# RIDE_IMAGE is set by the GitHub Actions deploy; for a manual deploy from
+# your Mac, run `RIDE_IMAGE=ride-board:latest docker compose up -d`.
 services:
   ride:
-    image: ride-board:latest
+    image: ${RIDE_IMAGE:-ghcr.io/mclaughlin111/ride-page:latest}
     container_name: ride-board
     restart: unless-stopped
     ports:
