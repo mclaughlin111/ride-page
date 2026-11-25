@@ -35,6 +35,8 @@ npm run bake:osm       # osm/*.osm.pbf  -> public/terrain/osm-{bristol,avon}.bin
 
 ## Local development
 
+The project `.npmrc` enables standard peer dependency resolution (`legacy-peer-deps=false`) for local installs, GitHub Actions and Docker. After changing dependencies, regenerate the lock with `npm install`; verify it with `npm ci` before pushing.
+
 ```bash
 npm install
 cp .env.example .env.local   # then edit the values
